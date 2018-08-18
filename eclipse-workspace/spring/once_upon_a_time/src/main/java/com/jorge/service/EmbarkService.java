@@ -9,6 +9,6 @@ public interface EmbarkService {
 
 	public List<Hero> findHeros();
 	public List<Quest>findQuests();
-
+	public void tellStory();
 	
 }

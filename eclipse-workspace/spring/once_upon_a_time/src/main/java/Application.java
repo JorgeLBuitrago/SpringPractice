@@ -17,26 +17,9 @@ public class Application {
 		ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
 		EmbarkService service = ac.getBean("embarkService", EmbarkService.class);
-
-		ArrayList<Hero> heroList = (ArrayList<Hero>) service.findHeros();
-		ArrayList<Quest> questList = (ArrayList<Quest>) service.findQuests();
-
-		Iterator<Hero> itHero = heroList.iterator();
-		Iterator<Quest> itQuest = questList.iterator();
-
-		while (itHero.hasNext() && itQuest.hasNext()) {
-			Quest quest = itQuest.next();
-			Hero hero = itHero.next();
-			System.out.println("King " + quest.getKing() + " has arrived. All rise!");
-			System.out.println("King declares that " + hero.getFullName());
-			System.out.println("Will embark on journey to " + quest.getDescription());
-			if (!"".equals(hero.getWeapon())) {
-				System.out.println("He will be using his favorite weapon ... " + hero.getWeapon());
-				System.out.println("against ... " + quest.getEnemy() + "");
-				System.out.println("");
-			}
-		}
-
+		
+		service.tellStory();
+		
 		((ConfigurableApplicationContext) ac).close();
 
 	}

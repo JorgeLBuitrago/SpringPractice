@@ -1,5 +1,7 @@
 package com.jorge.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,4 +48,25 @@ public class EmbarkServiceImpl  implements EmbarkService {
 		return king;
 	}
 	
+	@Override
+	public void tellStory() {
+		ArrayList<Hero> heroList = (ArrayList<Hero>) this.findHeros();
+		ArrayList<Quest> questList = (ArrayList<Quest>) this.findQuests();
+
+		Iterator<Hero> itHero = heroList.iterator();
+		Iterator<Quest> itQuest = questList.iterator();
+
+		while (itHero.hasNext() && itQuest.hasNext()) {
+			Quest quest = itQuest.next();
+			Hero hero = itHero.next();
+			System.out.println("King " + quest.getKing() + " has arrived. All rise!");
+			System.out.println("King declares that " + hero.getFullName());
+			System.out.println("Will embark on journey to " + quest.getDescription());
+			if (!"".equals(hero.getWeapon())) {
+				System.out.println("He will be using his favorite weapon ... " + hero.getWeapon());
+				System.out.println("against ... " + quest.getEnemy() + "");
+				System.out.println("");
+			}
+		}
+	}
 }
